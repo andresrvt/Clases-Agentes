@@ -27,10 +27,14 @@ COPY . .
 
 RUN chmod -R 775 storage bootstrap/cache \
     && mkdir -p storage/logs \
-    && chown -R www-data:www-data storage bootstrap/cache
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && composer install --no-interaction --prefer-dist --optimize-autoloader \
+    && chown -R www-data:www-data vendor
 
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+COPY docker/app/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 9000
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["php-fpm"]
