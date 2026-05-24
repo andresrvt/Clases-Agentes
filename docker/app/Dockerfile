@@ -25,6 +25,10 @@ RUN npm install
 
 COPY . .
 
+RUN chmod -R 775 storage bootstrap/cache \
+    && mkdir -p storage/logs \
+    && chown -R www-data:www-data storage bootstrap/cache
+
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 EXPOSE 9000
