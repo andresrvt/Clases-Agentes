@@ -1,7 +1,7 @@
 ---
 description: Implements tasks from OpenSpec changes. Reads tasks.md and implements each task in order, marking checkboxes as complete.
 mode: subagent
-model: alibaba-coding-plan/glm-5
+model: opencode/qwen3.6-plus
 temperature: 0.2
 tools:
   read: true

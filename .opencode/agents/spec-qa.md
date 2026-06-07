@@ -1,7 +1,7 @@
 ---
 description: Verifies that implemented code matches OpenSpec requirements. Checks task completion, spec compliance, code quality, and potential regressions. Executes /opsx-verify for systematic verification. Never edits code.
 mode: subagent
-model: alibaba-coding-plan/qwen3.6-plus
+model: opencode/minimax-m2.7
 temperature: 0.1
 tools:
   read: true

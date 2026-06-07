@@ -4,63 +4,49 @@ namespace App\Http\Controllers;
 
 use App\Models\IaConfiguration;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class IaConfigurationController extends Controller
 {
     public function index(): JsonResponse
     {
         $configs = IaConfiguration::all();
-
         return response()->json($configs);
     }
 
-    public function show(): JsonResponse
+    public function show(int $id): JsonResponse
     {
-        $configs = IaConfiguration::all();
-
-        return response()->json($configs);
+        $config = IaConfiguration::findOrFail($id);
+        return response()->json($config);
     }
 
-    public function update(): JsonResponse
+    public function update(Request $request, int $id): JsonResponse
     {
-        $data = request()->validate([
+        $data = $request->validate([
             'prompt' => 'nullable|string',
             'model' => 'nullable|string',
-            'job' => 'nullable|string',
+            'process_name' => 'nullable|string',
+            'status' => 'nullable|in:active,inactive',
         ]);
 
-        $config = IaConfiguration::first();
+        $config = IaConfiguration::findOrFail($id);
+        $config->update($data);
 
-        if ($config) {
-            $config->update($data);
-        } else {
-            $config = IaConfiguration::create($data);
-        }
-
-        return response()->json([
-            'id' => $config->id,
-            'prompt' => $config->prompt,
-            'model' => $config->model,
-            'job' => $config->job,
-        ]);
+        return response()->json($config);
     }
 
-    public function store(): JsonResponse
+    public function store(Request $request): JsonResponse
     {
-        $data = request()->validate([
+        $data = $request->validate([
             'prompt' => 'nullable|string',
             'model' => 'nullable|string',
-            'job' => 'nullable|string',
+            'process_name' => 'required|string',
+            'status' => 'nullable|in:active,inactive',
         ]);
 
         $config = IaConfiguration::create($data);
 
-        return response()->json([
-            'id' => $config->id,
-            'prompt' => $config->prompt,
-            'model' => $config->model,
-            'job' => $config->job,
-        ], 201);
+        return response()->json($config, 201);
     }
 
     public function destroy(int $id): JsonResponse

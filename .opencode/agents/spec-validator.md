@@ -1,7 +1,7 @@
 ---
 description: Reviews OpenSpec artifacts for coherence, feasibility, and completeness. Also verifies technical consistency of generated documentation and reconciliation changes. Never edits OpenSpec artifacts.
 mode: subagent
-model: alibaba-coding-plan/qwen3.6-plus
+model: opencode/minimax-m2.7
 temperature: 0.1
 tools:
   read: true

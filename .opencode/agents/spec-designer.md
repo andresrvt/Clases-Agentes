@@ -1,7 +1,7 @@
 ---
 description: Creates, corrects, and reconciles OpenSpec artifacts (proposal, specs, design, tasks) following the spec-driven schema. Reads validator feedback and iterates until approved.
 mode: subagent
-model: alibaba-coding-plan/qwen3.6-plus
+model: opencode/minimax-m2.7
 temperature: 0.4
 tools:
   read: true

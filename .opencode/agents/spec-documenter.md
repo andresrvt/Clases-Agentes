@@ -1,7 +1,7 @@
 ---
 description: Generates project documentation after QA approval. Creates README updates, CHANGELOG entries, docstrings, usage guides, technical documentation (docs/technical/), and user documentation (docs/manual/) based on approved artifacts and implemented code.
 mode: subagent
-model: alibaba-coding-plan/qwen3.6-plus
+model: opencode/qwen3.6-plus
 temperature: 0.3
 tools:
   read: true
