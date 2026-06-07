@@ -129,6 +129,7 @@
             border-radius: 9999px;
             color: var(--color-text-muted);
         }
+        /* Legacy class name; purely presentational and unrelated to the data field name */
         .card-job {
             font-size: 0.875rem;
             color: var(--color-text-muted);
@@ -313,9 +314,10 @@
                     <input type="text" id="model" placeholder="e.g., llama3, mistral, gpt4all" required>
                 </div>
 
+                <!-- Field name must match backend validation (IaConfigurationController) and model $fillable -->
                 <div class="form-group">
-                    <label for="job">Job</label>
-                    <input type="text" id="job" placeholder="e.g., text-generation, code-assistant" required>
+                    <label for="process_name">Process Name</label>
+                    <input type="text" id="process_name" placeholder="e.g., text-generation, code-assistant" required>
                 </div>
 
                 <div class="form-group">
@@ -366,14 +368,14 @@
                 <div class="card ${accents[index % accents.length]}" onclick="editConfig(${config.id})">
                     <div class="card-header">
                         <span class="card-model">${escapeHtml(config.model)}</span>
-                        <span class="card-badge">${escapeHtml(config.job)}</span>
+                        <span class="card-badge">${escapeHtml(config.process_name)}</span>
                     </div>
                     <div class="card-job">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.649z"/>
                             <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        ${escapeHtml(config.job)}
+                        ${escapeHtml(config.process_name)}
                     </div>
                     <div class="card-prompt">${escapeHtml(config.prompt)}</div>
                 </div>
@@ -399,7 +401,7 @@
                 title.textContent = 'Edit Configuration';
                 document.getElementById('config-id').value = config.id;
                 document.getElementById('model').value = config.model || '';
-                document.getElementById('job').value = config.job || '';
+                document.getElementById('process_name').value = config.process_name || '';
                 document.getElementById('prompt').value = config.prompt || '';
             } else {
                 title.textContent = 'New Configuration';
@@ -430,9 +432,10 @@
             e.preventDefault();
 
             const id = document.getElementById('config-id').value;
+            // Payload keys must align with backend validation rules and the model's $fillable array
             const data = {
                 model: document.getElementById('model').value,
-                job: document.getElementById('job').value,
+                process_name: document.getElementById('process_name').value,
                 prompt: document.getElementById('prompt').value,
             };
 

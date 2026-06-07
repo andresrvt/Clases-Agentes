@@ -54,6 +54,17 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
+## Project Overview
+
+This Laravel application includes an **AI Configuration Management** module that allows users to create, update, and manage local AI service settings through a web-based dashboard.
+
+### Features
+
+- **AI Configuration Dashboard** (`resources/views/ai-configuration.blade.php`)
+  - Create and edit AI model configurations.
+  - Store settings for `model`, `process_name`, and `prompt`.
+  - Frontend communicates with the backend API (`/api/ia-configuration`) using a JSON payload that aligns with controller validation and Eloquent model fillable fields.
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
